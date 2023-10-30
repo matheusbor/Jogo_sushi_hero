@@ -28,12 +28,12 @@ func _move() -> void:
 		0,
 		_input_direction.y
 		).normalized()
-	_direction = _direction.rotated(Vector3.UP, _spring_arm_offset.rotation.y)#é o objeto deste código
 	
 	is_running()#definir ela dentro da _move() para ela só executar enquanto o personagem se mover
+	#_direction = _direction.rotated(Vector3.UP, _spring_arm_offset.rotation.y)#é o objeto deste código
+	
 	velocity.x = _direction.x * _current_speed
 	velocity.z = _direction.z * _current_speed
-	
 	
 	
 func is_running() -> bool:
