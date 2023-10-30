@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://bemr2w5huqbde"]
+
+[ext_resource type="PackedScene" uid="uid://bpjlklficmhyn" path="res://furniture/floors/scenes/floor_1.tscn" id="1_7pjqq"]
+[ext_resource type="PackedScene" uid="uid://cw2y5dgl3jge4" path="res://furniture/floors/scenes/floor_2.tscn" id="2_m43cg"]
+[ext_resource type="PackedScene" uid="uid://hmvqw7wwukar" path="res://furniture/floors/scenes/floor_tiles.tscn" id="3_da206"]
+[ext_resource type="PackedScene" uid="uid://m1lwge081krq" path="res://furniture/floors/scenes/floor_wood.tscn" id="4_cp62y"]
+[ext_resource type="PackedScene" uid="uid://dpn7edspjfqlw" path="res://furniture/floors/scenes/floor_wood_broken.tscn" id="5_m3hip"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Floor1" parent="." instance=ExtResource("1_7pjqq")]
+
+[node name="Floor2" parent="." instance=ExtResource("2_m43cg")]
+
+[node name="FloorTiles" parent="." instance=ExtResource("3_da206")]
+
+[node name="FloorWood" parent="." instance=ExtResource("4_cp62y")]
+
+[node name="FloorWoodBroken" parent="." instance=ExtResource("5_m3hip")]

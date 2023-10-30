@@ -10264,8 +10264,10 @@ _spring_arm_offset = NodePath("Spring Arm Offset")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 shape = SubResource("CapsuleShape3D_ol2mh")
 
-[node name="Panda" type="Node3D" parent="."]
+[node name="Panda" type="Node3D" parent="." node_paths=PackedStringArray("_character", "_animation")]
 script = ExtResource("2_tlnkw")
+_character = NodePath("..")
+_animation = NodePath("AnimationPlayer")
 
 [node name="body" type="Node3D" parent="Panda"]
 
@@ -10311,7 +10313,7 @@ bones/5/parent = 4
 bones/5/rest = Transform3D(1, -1.4826e-07, -1.6542e-06, -8.55255e-08, 0.990089, -0.140441, 1.65863e-06, 0.140441, 0.990089, -4.85769e-11, 0.519935, -8.19617e-08)
 bones/5/enabled = true
 bones/5/position = Vector3(-4.85769e-11, 0.519935, -8.19617e-08)
-bones/5/rotation = Quaternion(0.0703949, -8.30266e-07, 1.57227e-08, 0.997519)
+bones/5/rotation = Quaternion(0.0703949, -8.30266e-07, 1.57228e-08, 0.997519)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "Neck"
 bones/6/parent = 5
@@ -10332,7 +10334,7 @@ bones/8/parent = 5
 bones/8/rest = Transform3D(0.663087, 0.746803, 0.0509988, -0.747456, 0.656918, 0.0988342, 0.0403076, -0.103655, 0.993796, 0.345991, 0.198118, -0.00831633)
 bones/8/enabled = true
 bones/8/position = Vector3(0.345991, 0.198118, -0.00831633)
-bones/8/rotation = Quaternion(-0.0556172, 0.00293653, -0.410424, 0.910192)
+bones/8/rotation = Quaternion(-0.0556172, 0.00293652, -0.410424, 0.910192)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/name = "UpperArm.L"
 bones/9/parent = 8
