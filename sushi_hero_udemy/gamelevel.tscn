@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c406vhblj4cri"]
+[gd_scene load_steps=13 format=3 uid="uid://c406vhblj4cri"]
 
 [ext_resource type="PackedScene" uid="uid://b6v0piwjpskuk" path="res://character/scenes/main_character.tscn" id="1_2lb1q"]
 [ext_resource type="PackedScene" uid="uid://bugljten4s6dp" path="res://grid_maps/scene/floor_map.tscn" id="2_x6nks"]
 [ext_resource type="PackedScene" uid="uid://dylrseab3yldq" path="res://grid_maps/scene/walls.tscn" id="3_dcs4e"]
 [ext_resource type="PackedScene" uid="uid://csleysy0ecbi4" path="res://grid_maps/scene/counters.tscn" id="4_nhi77"]
 [ext_resource type="Material" uid="uid://btntdpqkc31xa" path="res://shaders/materials/sky_shader.tres" id="5_n5c0h"]
+[ext_resource type="Shader" path="res://shaders/shaders/fog.gdshader" id="6_hgaku"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_mmi80"]
 size = Vector2(1000, 1000)
@@ -25,7 +26,20 @@ sky = SubResource("Sky_3dyt8")
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
-volumetric_fog_density = 0.0002
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0092
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bycd2"]
+shader = ExtResource("6_hgaku")
+shader_parameter/base_density = 1.0
+shader_parameter/base_color = null
+shader_parameter/fade_out_height = 2.0
+shader_parameter/fade_out_distance = 1.5
+shader_parameter/noise_amounts = Vector3(0.4, 0.35, 0.25)
+shader_parameter/noise_scales = Vector3(1, 2, 4)
+shader_parameter/noise_velocity1 = Vector3(0.5, 0, 0)
+shader_parameter/noise_velocity2 = Vector3(1, 0, -1)
+shader_parameter/noise_velocity3 = Vector3(0, 0.6, 0.3)
 
 [node name="Gamelevel" type="Node3D"]
 
@@ -130,3 +144,13 @@ shadow_blur = 0.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_j2woh")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 82.5)
+size = Vector3(160, 0.5, 160)
+material = SubResource("ShaderMaterial_bycd2")
+
+[node name="FogVolume2" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -115)
+size = Vector3(160, 0.5, 160)
+material = SubResource("ShaderMaterial_bycd2")
