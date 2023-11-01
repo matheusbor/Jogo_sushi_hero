@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c406vhblj4cri"]
+[gd_scene load_steps=14 format=3 uid="uid://c406vhblj4cri"]
 
 [ext_resource type="PackedScene" uid="uid://b6v0piwjpskuk" path="res://character/scenes/main_character.tscn" id="1_2lb1q"]
 [ext_resource type="PackedScene" uid="uid://bugljten4s6dp" path="res://grid_maps/scene/floor_map.tscn" id="2_x6nks"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://csleysy0ecbi4" path="res://grid_maps/scene/counters.tscn" id="4_nhi77"]
 [ext_resource type="Material" uid="uid://btntdpqkc31xa" path="res://shaders/materials/sky_shader.tres" id="5_n5c0h"]
 [ext_resource type="Shader" path="res://shaders/shaders/fog.gdshader" id="6_hgaku"]
+[ext_resource type="PackedScene" uid="uid://dnaxn14tjm3d7" path="res://interface/scenes/GUI.tscn" id="7_piwt1"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_mmi80"]
 size = Vector2(1000, 1000)
@@ -23,9 +24,6 @@ sky_material = ExtResource("5_n5c0h")
 [sub_resource type="Environment" id="Environment_j2woh"]
 background_mode = 2
 sky = SubResource("Sky_3dyt8")
-ssr_enabled = true
-ssao_enabled = true
-ssil_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0092
 
@@ -53,7 +51,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_k685h")
 [node name="levels" type="Node3D" parent="."]
 
 [node name="floorgridmap" parent="levels" instance=ExtResource("2_x6nks")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.092, 0)
 data = {
 "cells": PackedInt32Array(0, 0, 0, 65532, 0, 0, 65528, 0, 0, 4, 0, 0, 8, 0, 0, 0, 65532, 0, 0, 65528, 0, 0, 65524, 0, 0, 4, 0, 0, 8, 0, 0, 12, 0, 12, 0, 0, 65524, 0, 0, 65532, 65532, 0, 65528, 65532, 0, 65524, 65532, 0, 65524, 65528, 0, 65524, 65524, 0, 65528, 65524, 0, 65532, 65524, 0, 65532, 65528, 0, 65528, 65528, 0, 4, 65532, 0, 4, 65528, 0, 8, 65532, 0, 4, 65524, 0, 12, 65532, 0, 12, 65528, 0, 12, 65524, 0, 8, 65524, 0, 8, 65528, 0, 4, 4, 0, 8, 4, 0, 12, 4, 0, 12, 8, 0, 12, 12, 0, 8, 12, 0, 4, 12, 0, 4, 8, 0, 8, 8, 0, 65532, 12, 0, 65528, 12, 0, 65524, 4, 0, 65524, 8, 0, 65524, 12, 0, 65528, 8, 0, 65532, 8, 0, 65532, 4, 0, 65528, 4, 0, 0, 16, 655360, 4, 16, 655360, 8, 16, 655360, 12, 16, 655360, 65532, 16, 655360, 65528, 16, 655360, 65524, 16, 655360, 0, 20, 655360, 65532, 20, 655360, 4, 20, 655360, 8, 20, 655360, 8, 24, 655360, 65528, 20, 655360, 65528, 24, 655360, 65532, 24, 655360, 0, 24, 655360, 4, 24, 655360, 65524, 20, 655360, 12, 20, 655360, 65534, 28, 655360, 2, 28, 655360, 65534, 32, 655360, 2, 32, 655360)
 }
@@ -142,7 +139,7 @@ transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, 4, 0)
 shadow_enabled = true
 shadow_blur = 0.5
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." groups=["enviroment"]]
 environment = SubResource("Environment_j2woh")
 
 [node name="FogVolume" type="FogVolume" parent="."]
@@ -154,3 +151,5 @@ material = SubResource("ShaderMaterial_bycd2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -115)
 size = Vector3(160, 0.5, 160)
 material = SubResource("ShaderMaterial_bycd2")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("7_piwt1")]
