@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwq0cck7qw5hh"]
+[gd_scene load_steps=3 format=3 uid="uid://dwq0cck7qw5hh"]
+
+[ext_resource type="Script" path="res://interface/scripts/fps_container.gd" id="1_yryb7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_34mb8"]
 font_size = 24
 
-[node name="ColorRect" type="ColorRect"]
+[node name="ColorRect" type="ColorRect" node_paths=PackedStringArray("_fps")]
 custom_minimum_size = Vector2(1280, 40)
 anchors_preset = 7
 anchor_left = 0.5
@@ -16,6 +18,8 @@ offset_right = 640.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0, 0, 0, 0.6)
+script = ExtResource("1_yryb7")
+_fps = NodePath("Label")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(102, 37)

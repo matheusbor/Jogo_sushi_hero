@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://8cjt3sy0l3a5"]
+
+[ext_resource type="PackedScene" uid="uid://cxiet3cxcits5" path="res://furniture/environment/table.tscn" id="1_eumgl"]
+[ext_resource type="Script" path="res://interatables/table.gd" id="1_o2e1b"]
+[ext_resource type="PackedScene" uid="uid://coes3he2dm1n" path="res://furniture/environment/plate.tscn" id="2_v48c2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j7oot"]
+radius = 3.2
+
+[node name="Area3D" type="Area3D" groups=["table"]]
+script = ExtResource("1_o2e1b")
+
+[node name="Table" parent="." instance=ExtResource("1_eumgl")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_j7oot")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Plate" parent="." instance=ExtResource("2_v48c2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
