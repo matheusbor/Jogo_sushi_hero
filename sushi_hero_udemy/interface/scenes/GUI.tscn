@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnaxn14tjm3d7"]
+[gd_scene load_steps=6 format=3 uid="uid://dnaxn14tjm3d7"]
 
 [ext_resource type="PackedScene" uid="uid://dwicykhirqsx2" path="res://interface/scenes/settings_container.tscn" id="1_u8ubh"]
 [ext_resource type="PackedScene" uid="uid://dwq0cck7qw5hh" path="res://interface/scenes/fps_container.tscn" id="2_w7xvd"]
 [ext_resource type="PackedScene" uid="uid://bjs7vgjaspq6i" path="res://interface/scenes/containers/fridge_container.tscn" id="3_l00nr"]
 [ext_resource type="PackedScene" uid="uid://drktnblm4qoui" path="res://interface/scenes/containers/oven_container.tscn" id="4_bcv5q"]
+[ext_resource type="PackedScene" uid="uid://b530wjb5orjia" path="res://interface/scenes/containers/cutting_container.tscn" id="5_r10wm"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 process_mode = 3
@@ -19,4 +20,7 @@ visible = false
 visible = false
 
 [node name="oven_container" parent="." instance=ExtResource("4_bcv5q")]
+visible = false
+
+[node name="cutting_container" parent="." instance=ExtResource("5_r10wm")]
 visible = false
