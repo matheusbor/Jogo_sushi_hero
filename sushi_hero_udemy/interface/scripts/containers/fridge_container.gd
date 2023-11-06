@@ -11,7 +11,6 @@ func initialize_fridge() -> void:
 	var _added: bool = false
 	for i in _amount:
 		var _random_index: int = randi() % _keys.size()
-	
 		for children in _interactable_container.get_children():
 			var _item: Dictionary = children.get_item()
 			if _item["item_name"] == ingredients.ingredients_dict[_keys[_random_index]]["item_name"]:

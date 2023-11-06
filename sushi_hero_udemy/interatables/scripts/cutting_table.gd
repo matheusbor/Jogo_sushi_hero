@@ -12,7 +12,7 @@ var _item_ref: MeshInstance3D = null
 
 func _interact() -> void:
 	_character_ref.change_position(_position, _rotation)
-	#chamar a interface
+	get_tree().call_group("cutting_container", "display", self, true)
 	
 func chop(_items: Array) ->  void:
 	_item_ref = _ingredients.get_node(_items[randi() % _items.size()].to_pascal_case())

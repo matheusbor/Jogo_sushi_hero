@@ -6,14 +6,20 @@ const _myf = preload("res://../character/códigos/character_body.gd")
 const _normal_speed: float = 5.0
 const _sprint_speed: float = 9.0
 
+var gold:int = 10
 var is_freezed: bool = false
 var can_interact: bool = true
 var _current_speed: float 
 var current_entity = null
+var _last_food: String = ""
+var _last_prepared_ingredient_amount: int
+var _last_prepared_ingredient: String = ""
 
 @export_category("Objects")
 @export var _body: Node3D = null
 @export var _spring_arm_offset: Node3D = null
+@export var _item_feedback: MeshInstance3D = null
+@export var _inventory: Node = null
 
 func _ready() -> void:
 	globals.character = self
@@ -71,3 +77,76 @@ func freeze(_state: bool) -> void:
 func change_position(_position: Vector3, _rotation: float)-> void:
 	global_position = _position
 	_body.rotation.y = _rotation	
+
+func chop(_prepared_ingredient: String, _amount: int) -> void:
+	can_interact = false
+	_last_prepared_ingredient_amount = _amount
+	_last_prepared_ingredient = _prepared_ingredient
+	
+	_item_feedback.get_node("FrontTexture").texture = load(
+		ingredients.ingredients_dict[_prepared_ingredient]["item_texture"])
+	_item_feedback.get_node("BackTexture").texture = load(
+	ingredients.ingredients_dict[_prepared_ingredient]["item_texture"])
+	
+	_body.is_chopping = true 
+	_body.animate(velocity)
+	set_physics_process(false)
+	_spring_arm_offset.can_rotate = true
+	_body.get_node("Body/Skeleton3D/Knife").show()
+	
+func on_chop_finished () -> void:
+	freeze(false)
+	_body.is_chopping = false
+	set_physics_process(true)
+	_body.get_node("Body/Skeleton3D/Knife").hide()
+	_item_feedback.get_node("Animation").play("show_ingredient")
+	
+func cook(_food : String) -> void:
+	_last_food = _food
+	can_interact = false
+	
+	_item_feedback.get_node("FrontTexture").texture = load(
+		recipes.recipe_dict[_food]["item_texture"])
+	_item_feedback.get_node("BackTexture").texture = load(
+	recipes.recipe_dict[_food]["item_texture"])
+		
+	_body.is_cooking = true
+	_body.animeate(velocity)
+	set_physics_process(false)
+	_spring_arm_offset.can_rotate = true
+	_body.get_node("Body/Skeleton3D/Pan").show()
+	
+func on_cook_finished() ->void:
+	freeze(false)
+	_body.is_cooking = false
+	set_physics_process(true)
+	_body.get_node("Body/Skeleton3D/Pan").hide()
+	_item_feedback.get_node("Animation").play("show")
+
+
+func _on_item_feedback_finished(_anim_name: String) -> void:
+	match _anim_name:
+		"show":
+			var _item: Dictionary = {}
+			_item[_last_food] = {
+				"item_amount" :  1,
+				"item_name" : _last_food,
+				"item_texture": recipes.recipes_dict[_last_food]["item_texture"],
+				"price":  recipes.recipes_dict[_last_food]["price"]
+			}
+			
+			_inventory.add_item(_item[_last_food])
+		"show_ingredient":
+			pass
+	can_interact = true
+	if current_entity != null:
+		current_entity.can_interact(true, self)
+
+func update_gold(_value: int, _type: String):
+	match _type:
+		"increase":
+			gold += _value
+			
+		"decrease":
+			gold -= _value
+	print(gold)

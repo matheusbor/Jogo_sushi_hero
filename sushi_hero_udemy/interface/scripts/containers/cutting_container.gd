@@ -27,7 +27,7 @@ func _on_chop__button_pressed():
 				update_interactable("update", _children.get_item(), "decrease")
 				
 		var _ingredient: String = _prepared_ingredients.keys()[0]
-		#globals.character.chop(_ingredient, _prepared_ingredients[_ingredient]["item_amount"])
+		globals.character.chop(_ingredient, _prepared_ingredients[_ingredient]["item_amount"])
 		_interactable.chop(_items)
 		_close()
 		

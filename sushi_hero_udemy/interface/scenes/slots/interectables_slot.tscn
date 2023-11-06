@@ -9,7 +9,7 @@
 
 [node name="slot" type="HBoxContainer" node_paths=PackedStringArray("_item_name", "_item_amount", "_item_texture")]
 offset_right = 360.0
-offset_bottom = 100.0
+offset_bottom = 80.0
 alignment = 1
 script = ExtResource("1_5jlmt")
 _item_name = NodePath("VBoxContainer/name")

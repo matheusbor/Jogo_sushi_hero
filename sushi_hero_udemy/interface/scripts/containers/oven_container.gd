@@ -19,18 +19,18 @@ func _on_cook_button_pressed():
 				
 				_recipes[_recipe][_ingredient] ={ 
 					"name": _ingredient, 
-					"amount": recipes.recipes_dict[_recipe]["ingredients"][_ingredients]["amount"]
+					"amount": recipes.recipes_dict[_recipe]["ingredients"][_ingredient]["amount"]
 				}
 				
-			for _r in _recipes:
-				if _recipes[_r] == _ingredients:
-					for _childrenn in _interactable_container.get_children():
-						var _amount: int = _childrenn.get_alt_item()["item_amount"]
-						for i in _amount:
-							update_interactable("update", _childrenn.get_item(), "decrease")
-					#globals.character.cook(_r)
-					_close()
-					return
+		for _r in _recipes:
+			if _recipes[_r] == _ingredients:
+				for _childrenn in _interactable_container.get_children():
+					var _amount: int = _childrenn.get_alt_item()["item_amount"]
+					for i in _amount:
+						update_interactable("update", _childrenn.get_item(), "decrease")
+				globals.character.cook(_r)
+				_close()
+				return
 					
 func change_current_container() -> void:
 	globals.current_container = "oven"
