@@ -47,7 +47,7 @@ func is_avaiable(_entity) ->void:
 	change_avaiable_state(false)
 	
 	off_set = chair_position[_index] - chair_offset_position[_index]
-	_entity.update_state("walking", off_set, global_position, rotation)
+	_entity.update_state("walking", off_set, global_position, _rotation)
 	
 func change_avaiable_state(state: bool) -> void:
 	_is_avaiable = state

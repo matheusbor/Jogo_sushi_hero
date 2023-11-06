@@ -16,6 +16,8 @@ func _ready() -> void:
 			button.item_selected.connect(_on_button_selected.bind(button))
 
 func _process(_delta: float) -> void:
+	if globals.character.is_freezed:
+		return 
 	if Input.is_action_just_pressed("ui_cancel"): # o exc
 		visible = not visible
 		get_tree().paused = not get_tree().paused #isso vai inverter sempre o valor

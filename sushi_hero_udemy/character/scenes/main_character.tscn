@@ -1,9 +1,10 @@
-[gd_scene load_steps=43 format=3 uid="uid://b6v0piwjpskuk"]
+[gd_scene load_steps=44 format=3 uid="uid://b6v0piwjpskuk"]
 
 [ext_resource type="Script" path="res://character/códigos/main_character.gd" id="1_2eewb"]
 [ext_resource type="Texture2D" uid="uid://cgv15rrweky" path="res://models/characters/with_knife_and_pan/panda_Sushi_Atlas.png" id="1_8fx2h"]
 [ext_resource type="Script" path="res://character/códigos/character_body.gd" id="2_tlnkw"]
 [ext_resource type="Script" path="res://character/códigos/spring_arm_offset.gd" id="3_tyibp"]
+[ext_resource type="Script" path="res://character/códigos/inventory.gd" id="5_wlyqo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ol2mh"]
 radius = 1.0
@@ -10257,17 +10258,17 @@ _data = {
 
 [node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("_body", "_spring_arm_offset")]
 script = ExtResource("1_2eewb")
-_body = NodePath("Panda/body")
+_body = NodePath("Panda")
 _spring_arm_offset = NodePath("Spring Arm Offset")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 shape = SubResource("CapsuleShape3D_ol2mh")
 
-[node name="Panda" type="Node3D" parent="." node_paths=PackedStringArray("_character", "_animation")]
+[node name="Panda" type="Node3D" parent="." node_paths=PackedStringArray("_character", "animation")]
 script = ExtResource("2_tlnkw")
 _character = NodePath("..")
-_animation = NodePath("AnimationPlayer")
+animation = NodePath("AnimationPlayer")
 
 [node name="body" type="Node3D" parent="Panda"]
 
@@ -10609,3 +10610,6 @@ spring_length = 5.0
 [node name="Camera3D" type="Camera3D" parent="Spring Arm Offset/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
 current = true
+
+[node name="inventory" type="Node" parent="." groups=["character_inventory"]]
+script = ExtResource("5_wlyqo")
