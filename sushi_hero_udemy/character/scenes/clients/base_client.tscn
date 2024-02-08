@@ -1,0 +1,135 @@
+[gd_scene load_steps=12 format=3 uid="uid://yufvqy82sdai"]
+
+[ext_resource type="Script" path="res://character/códigos/base_client.gd" id="1_silse"]
+[ext_resource type="Texture2D" uid="uid://b78bfe0nw026p" path="res://foods/assets/maguro_nigiri.png" id="1_watd8"]
+[ext_resource type="Script" path="res://character/códigos/client_body.gd" id="2_up8s1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yxwb"]
+radius = 1.0
+height = 3.604
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iud5f"]
+radius = 6.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ch8ru"]
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjaep"]
+shading_mode = 0
+albedo_color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[sub_resource type="Animation" id="Animation_6dxgk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dkwxg"]
+resource_name = "rotate"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 4.0001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0), Vector3(1.5708, 6.28319, 0), Vector3(1.5708, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2wb0y"]
+resource_name = "rotação"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 4.0001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0), Vector3(1.5708, 6.28319, 0), Vector3(1.5708, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hec4g"]
+_data = {
+"RESET": SubResource("Animation_6dxgk"),
+"rotate": SubResource("Animation_dkwxg"),
+"rotação": SubResource("Animation_2wb0y")
+}
+
+[node name="base_client" type="CharacterBody3D" node_paths=PackedStringArray("_armature", "_client_feedback", "_navigation_agent", "_eat_timer", "_wait_timer")]
+script = ExtResource("1_silse")
+_armature = NodePath("body")
+_client_feedback = NodePath("clientfeedback")
+_navigation_agent = NodePath("NavigationAgent3D")
+_eat_timer = NodePath("eating")
+_wait_timer = NodePath("waiting")
+
+[node name="body" type="Node3D" parent="." node_paths=PackedStringArray("_client")]
+script = ExtResource("2_up8s1")
+_client = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_6yxwb")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+
+[node name="interectable_area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interectable_area"]
+shape = SubResource("SphereShape3D_iud5f")
+
+[node name="clientfeedback" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, -5.42999e-06, -1.5, 0, 1.5, -5.42999e-06, 0, 5, 0)
+visible = false
+mesh = SubResource("CylinderMesh_ch8ru")
+surface_material_override/0 = SubResource("StandardMaterial3D_vjaep")
+
+[node name="front" type="Sprite3D" parent="clientfeedback"]
+transform = Transform3D(0.08, 0, 0, 0, -3.49691e-09, -0.08, 0, 0.08, -3.49691e-09, 0, 0.0519402, 2.27038e-09)
+flip_v = true
+texture = ExtResource("1_watd8")
+
+[node name="back" type="Sprite3D" parent="clientfeedback"]
+transform = Transform3D(0.08, 0, 0, 0, -3.49691e-09, -0.08, 0, 0.08, -3.49691e-09, 0, -0.052, 0)
+flip_h = true
+flip_v = true
+texture = ExtResource("1_watd8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="clientfeedback"]
+libraries = {
+"": SubResource("AnimationLibrary_hec4g")
+}
+
+[node name="eating" type="Timer" parent="."]
+wait_time = 5.334
+one_shot = true
+
+[node name="waiting" type="Timer" parent="."]
+wait_time = 120.0
+one_shot = true
+
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
+[connection signal="body_entered" from="interectable_area" to="." method="_on_interactable_area_body_entered"]
+[connection signal="body_exited" from="interectable_area" to="." method="_on_interectable_area_body_exited"]
+[connection signal="timeout" from="eating" to="body" method="_on_eating_timeout"]
+[connection signal="timeout" from="waiting" to="." method="_on_waiting_timeout"]

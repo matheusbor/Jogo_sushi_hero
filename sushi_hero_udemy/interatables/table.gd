@@ -3,10 +3,10 @@ extends Area3D
 const stool: PackedScene = preload("res://furniture/environment/stool.tscn")
 
 var chair_position: Array = [
-	Vector3(0, 0, 2),
-	Vector3(2, 0, 0),
 	Vector3(0, 0, -2),
-	Vector3(-2, 0, 0)
+	Vector3(2, 0, 0),
+	Vector3(-2, 0, 0),
+	Vector3(0, 0, 2)
 ]
 
 var chair_offset_position: Array = [
@@ -44,11 +44,11 @@ func is_avaiable(_entity) ->void:
 		return
 	var _index: int = randi() % _stools.get_child_count()
 	var _rotation: float = angle_rotation[_index]
-	change_avaiable_state(false)
+	change_available_state(false)
 	
 	off_set = chair_position[_index] - chair_offset_position[_index]
 	_entity.update_state("walking", off_set, global_position, _rotation)
 	
-func change_avaiable_state(state: bool) -> void:
+func change_available_state(state: bool) -> void:
 	_is_avaiable = state
 	
