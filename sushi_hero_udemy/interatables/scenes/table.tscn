@@ -36,7 +36,7 @@ shape = SubResource("SphereShape3D_j7oot")
 [node name="Plate" parent="." instance=ExtResource("2_v48c2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
-[node name="Food_Dango" parent="Plate" instance=ExtResource("4_7bnpn")]
+[node name="Dango" parent="Plate" instance=ExtResource("4_7bnpn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.307838, 0)
 visible = false
 

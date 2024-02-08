@@ -313,7 +313,7 @@ script = ExtResource("16_h8uyq")
 _spawn_timer = NodePath("spawn")
 
 [node name="spawn" type="Timer" parent="clients"]
-wait_time = 20.0
+wait_time = 30.0
 one_shot = true
 
 [node name="collision" type="StaticBody3D" parent="."]

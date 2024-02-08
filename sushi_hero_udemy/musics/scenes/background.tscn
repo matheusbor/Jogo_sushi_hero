@@ -4,5 +4,5 @@
 
 [node name="background" type="AudioStreamPlayer"]
 stream = ExtResource("1_s6bws")
-volume_db = -35.0
+volume_db = -25.0
 autoplay = true
