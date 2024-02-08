@@ -298,7 +298,7 @@ curve = SubResource("Curve3D_c203d")
 transform = Transform3D(-4.37043e-08, 0, -0.999814, 0, 0.999796, 0, 0.999837, 0, -4.37033e-08, -30, 0, 35)
 
 [node name="Truck" parent="Path3D/PathFollow3D" instance=ExtResource("15_kcirv")]
-transform = Transform3D(1, 6.44377e-10, -1.16415e-10, -7.8353e-10, 1, 4.65661e-10, 0, -4.65661e-10, 1, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Path3D"]
 autoplay = "path"
@@ -313,7 +313,7 @@ script = ExtResource("16_h8uyq")
 _spawn_timer = NodePath("spawn")
 
 [node name="spawn" type="Timer" parent="clients"]
-wait_time = 5.0
+wait_time = 10.0
 one_shot = true
 
 [node name="collision" type="StaticBody3D" parent="."]
