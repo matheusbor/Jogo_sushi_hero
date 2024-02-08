@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://05abljaaccom"]
-
-[ext_resource type="AudioStream" uid="uid://drrxq3p82vlde" path="res://musics/bgm.ogg" id="1_s6bws"]
-
-[node name="background" type="AudioStreamPlayer"]
-stream = ExtResource("1_s6bws")
-volume_db = -35.0
-autoplay = true

@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://opkk621wmr1x"]
-
-[ext_resource type="Script" path="res://interatables/scripts/interectable_area.gd" id="1_qj3di"]
-
-[node name="interectable_area" type="Area3D"]
-script = ExtResource("1_qj3di")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
